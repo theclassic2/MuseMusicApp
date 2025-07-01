@@ -2,6 +2,7 @@ package com.codingdojo.muse.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,4 +54,19 @@ public class SongService {
 		currentSong.getLikedUsers().remove(currentUser);
 		songRepo.save(currentSong);
 	}
+	
+	public List<Song> getSongsByGenre(String genre) {
+		if (genre == null || genre.isEmpty() || genre.equals("all")) {
+			return songRepo.findAll();
+		}
+	    return songRepo.findByGenre(genre);
+	}
+	
+    public List<String> getAllGenres() {
+        return songRepo.findAll()
+            .stream()
+            .map(Song::getGenre)
+            .distinct()
+            .collect(Collectors.toList());
+    }
 }

@@ -12,13 +12,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Muse - Music Discovery Starts Here</title>
-<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link href="
+https://cdn.jsdelivr.net/npm/bootswatch@5.3.7/dist/flatly/bootstrap.min.css
+" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
 			<div class="container-fluid">
-				<a class="navbar-brand fs-1" href="#">Muse</a>
+				<a class="navbar-brand fs-1 text-success" href="/songs">Muse</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 					aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -28,22 +30,22 @@
 				<div class="collapse navbar-expand show text-end"
 					id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="nav-link" href="/songs">Home</a>
-						<a class="nav-link" aria-current="page" href="/songs/curated">My Added Songs</a>
-						<a class="nav-link active" aria-current="page" href="/songs/new">Add a Song</a>
-						<a class="nav-link" href="/songs/discover">Discover
+						<a class="nav-link text-light" href="/songs">Home</a>
+						<a class="nav-link text-light" aria-current="page" href="/songs/curated">My Added Songs</a>
+						<a class="nav-link active text-success" aria-current="page" href="/songs/new">Add a Song</a>
+						<a class="nav-link text-light" href="/songs/discover">Discover
 							New Music</a>
 						<form action="/logout" method="post">
-							<input class="nav-link" type="submit" value="logout" />
+							<input class="nav-link text-light" type="submit" value="logout" />
 						</form>
 					</div>
 				</div>
 			</div>
 		</nav>
 		<div>
-			<h2 class="text-center display-5">Add A Song</h2>
+			<h2 class="text-center display-5 bg-secondary p-4 mb-0">Add A Song</h2>
 		</div>
-		<div class="container d-flex justify-content-center align-items-center">
+		<div class="container d-flex justify-content-center bg-secondary mt-0 min-vh-100">
 		<form:form action="/songs/new" method="post" modelAttribute="newSong">
 			<p>
 				<form:label path="name">Name:</form:label>

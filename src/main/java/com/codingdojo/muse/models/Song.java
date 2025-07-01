@@ -42,7 +42,7 @@ public class Song {
 	@NotNull
     private String album;
 	
-	@Min(value=1900 ,message="The year must be at least 1900.")
+	@Min(value=1600 ,message="The year must be at least 1600.")
 	@Max(value=2025, message="The year cannot be in the future.")
 	@NotNull(message="Please select the year the song was released.")
 	private Integer releaseYear;

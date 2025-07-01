@@ -12,7 +12,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Muse - Music Discovery Starts Here</title>
-<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link href="
+https://cdn.jsdelivr.net/npm/bootswatch@5.3.7/dist/flatly/bootstrap.min.css
+" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
@@ -20,7 +22,7 @@
 		<h2 class="text-center fw-light fst-italic">Music Discovery Starts Here</h2>
 		<div class="m-2 p-2 mx-auto" style="width: 900px;">
 			<div class="d-flex mx-auto my-4 justify-content-between">
-				<div class="border border-dark p-3 col-5 bg-light">
+				<div class="border border-dark p-3 col-5 bg-secondary">
 					<h2>Register</h2>
 					<form:form action="/register" method="post"
 						modelAttribute="newUser">
@@ -48,10 +50,10 @@
 							<form:input class="form-control form-control-lg w-75"
 								type="password" path="confirm" />
 						</p>
-						<button class="btn btn-primary btn-lg">Register</button>
+						<button class="btn btn-success btn-lg">Register</button>
 					</form:form>
 				</div>
-				<div class="border border-dark p-3 col-5 bg-light">
+				<div class="border border-dark p-3 col-5 bg-secondary">
 					<h2 class="caution">Login</h2>
 					<form:form action="/login" method="post"
 						modelAttribute="loginUser">

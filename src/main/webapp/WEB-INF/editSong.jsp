@@ -12,13 +12,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Edit Music</title>
-<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link href="
+https://cdn.jsdelivr.net/npm/bootswatch@5.3.7/dist/flatly/bootstrap.min.css
+" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
 			<div class="container-fluid">
-				<a class="navbar-brand fs-1" href="#">Muse</a>
+				<a class="navbar-brand fs-1 text-success" href="/songs">Muse</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 					aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -28,24 +30,23 @@
 				<div class="collapse navbar-expand show text-end"
 					id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="nav-link" href="/songs">Home</a>
+						<a class="nav-link text-light" href="/songs">Home</a>
 						 <a
-							class="nav-link" href="/songs/discover">Discover New Music</a> 
-						<a class="nav-link active" aria-current="page" href="/songs/new">Add
-							a Song</a> <a class="nav-link" href="/songs/discover">Discover
-							New Music</a> <a class="nav-link" href="/logout">Logout</a>
+							class="nav-link text-light" href="/songs/discover">Discover New Music</a> 
+						<a class="nav-link active text-light" aria-current="page" href="/songs/new">Add
+							a Song</a> <a class="nav-link text-light" href="/songs/discover">Discover
+							New Music</a>
 						<form action="/logout" method="post">
-							<input class="nav-link" type="submit" value="logout" />
+							<input class="nav-link text-light" type="submit" value="logout" />
 						</form>
 					</div>
 				</div>
 			</div>
 		</nav>
-		<div>
-			<h2 class="text-center">Edit <c:out value="${currentSong.name}"/></h2>
-		</div>
-		<div
-			class="container d-flex justify-content-center align-items-center">
+			<h2 class="text-center bg-secondary mb-0 p-4">Edit <c:out value="${currentSong.name}"/></h2>
+
+		<div class="container-fluid d-flex justify-content-center bg-secondary mt-0
+					min-vh-100">
 			<form:form action="/songs/${currentSong.id}/edit" method="post" modelAttribute="currentSong">
 				<input type="hidden" name="_method" value="put">
 				<p>

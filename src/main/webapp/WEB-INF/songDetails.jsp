@@ -11,14 +11,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Music Details</title>
-<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<title>${currentSong.name}</title>
+<link href="
+https://cdn.jsdelivr.net/npm/bootswatch@5.3.7/dist/flatly/bootstrap.min.css
+" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
 			<div class="container-fluid">
-				<a class="navbar-brand fs-1" href="#">Muse</a>
+				<a class="navbar-brand fs-1 text-success" href="/songs">Muse</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 					aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -28,24 +30,20 @@
 				<div class="collapse navbar-expand show text-end"
 					id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="nav-link" href="/songs">Home</a> <a class="nav-link"
+						<a class="nav-link text-light" href="/songs">Home</a> <a class="nav-link text-light"
 							aria-current="page" href="/songs/curated">My Added Songs</a> <a
-							class="nav-link" href="/songs/new">Add a Song</a> <a
-							class="nav-link" href="/songs/discover">Discover New Music</a>
+							class="nav-link text-light" href="/songs/new">Add a Song</a> <a
+							class="nav-link text-light" href="/songs/discover">Discover New Music</a>
 						<form action="/logout" method="post">
-							<input class="nav-link" type="submit" value="logout" />
+							<input class="nav-link text-light" type="submit" value="logout" />
 						</form>
 					</div>
 				</div>
 			</div>
 		</nav>
-		<div>
-			<h2 class="text-center display-5 fw-bold fst-italic">${currentSong.name} Details</h2>
-		</div>
-		<div class="container">
-			<div class="card bg-light text-dark">
-				<div class="card-body fs-2">
-					<p>
+		<div class="row bg-secondary mx-auto fs-3 p-5 min-vh-100">
+			<div class="col mt-5">
+			<p>
 				Song Name:
 				<c:out value="${currentSong.name}" />
 			</p>
@@ -69,7 +67,7 @@
 				Added by:
 				<c:out value="${currentSong.creator.userName}" />
 			</p>
-			<c:if test="${userID.equals(currentSong.creator.id) }">
+						<c:if test="${userID.equals(currentSong.creator.id) }">
 				<a class="btn btn-success btn-lg"
 					href="/songs/${currentSong.id}/edit">Edit Song</a>
 				<form action="/songs/${currentSong.id}/delete" method="post">
@@ -78,24 +76,25 @@
 						value="Delete Song">
 				</form>
 			</c:if>
+			</div>
+			<div class="col mt-5">
 			<p>Liked By:</p>
-			<ul>
+			<ul class="list-group">
 				<c:forEach var="likedUser" items="${currentSong.likedUsers}">
-					<li><c:out value="${likedUser.userName}" /></li>
+					<li class="list-group-item bg-light"><c:out value="${likedUser.userName}" /></li>
 				</c:forEach>
 			</ul>
 			<c:if test="${!userID.equals(currentSong.creator.id) }">
 				<c:choose>
 					<c:when test="${currentSong.likedUsers.contains(currentUser)}">
-						<p>Dislike here</p>
 						<form action="/songs/${currentSong.id}/unlikeSong" method="POST">
 							<input type="hidden" name="_method" value="delete"> <input
-								class="btn btn-danger" type="submit" value="UnLike">
+								class="btn btn-danger" type="submit" value="Remove Like">
 						</form>
 					</c:when>
 					<c:otherwise>
 						<form action="/songs/${currentSong.id}/likeSong" method="POST">
-							<input class="btn btn-success" type="submit" value="Like">
+							<input class="btn btn-success" type="submit" value="Like Song">
 						</form>
 					</c:otherwise>
 				</c:choose>
@@ -105,6 +104,5 @@
 			</div>
 			
 		</div>
-	</div>
 </body>
 </html>

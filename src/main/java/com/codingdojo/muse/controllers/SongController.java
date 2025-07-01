@@ -1,6 +1,7 @@
 package com.codingdojo.muse.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingdojo.muse.models.Song;
 import com.codingdojo.muse.services.SongService;
@@ -58,7 +60,7 @@ public class SongController {
 		genres.add("Country");
 		genres.add("Classical");
 		genres.add("Electronic");
-		genres.add("HipHop");
+		genres.add("Hip Hop/Rap");
 		genres.add("Jazz");
 		genres.add("Latin");
 		genres.add("Pop");
@@ -74,15 +76,30 @@ public class SongController {
 	}
 	
 	@GetMapping("/songs/discover")
-	public String viewAllSongs(Model viewModel) {
+	public String viewAllSongs(@RequestParam(value = "genre", required = false) String genre, Model viewModel) {
+		List<Song> songs = songServ.getSongsByGenre(genre);
+		List<String> genres = songServ.getAllGenres();
 		Long userID = (Long) session.getAttribute("userID");
 		if (userID == null) {
 			return "redirect:/";
 		}
 		viewModel.addAttribute("allSongs", songServ.readAllSongs());
+		viewModel.addAttribute("genres", genres);
 		return "songDiscovery.jsp";
 	}
 	
+	@GetMapping("/songs/discover/genre")
+	public String viewSongsByGenre(@RequestParam(value = "genre", required = false) String genre, Model viewModel) {
+		List<Song> songs = songServ.getSongsByGenre(genre);
+		List<String> genres = songServ.getAllGenres();
+		Long userID = (Long) session.getAttribute("userID");
+		if (userID == null) {
+			return "redirect:/";
+		}
+		viewModel.addAttribute("allSongs", songServ.getSongsByGenre(genre));
+		viewModel.addAttribute("genres", genres);
+		return "categories.jsp";
+	}
 	
 	@PostMapping("/songs/new")
 	public String createSong(Model viewModel,@Valid @ModelAttribute("newSong") Song newSong,
@@ -135,19 +152,7 @@ public class SongController {
 	
 	@GetMapping("/songs/{id}/edit") 
 	public String editSong(@PathVariable Long id, Model viewModel) {
-		ArrayList<String> genres = new ArrayList<String>();
-		genres.add("Alternative");
-		genres.add("Country");
-		genres.add("Classical");
-		genres.add("Electronic");
-		genres.add("HipHop");
-		genres.add("Jazz");
-		genres.add("Latin");
-		genres.add("Pop");
-		genres.add("Rock");
-		genres.add("Rnb");
-		genres.add("Soundtracks");
-		viewModel.addAttribute("genres", genres);
+		List<String> genres = songServ.getAllGenres();
 		Long userID = (Long) session.getAttribute("userID");
 		if (userID == null) {
 			return "redirect:/";
@@ -157,6 +162,7 @@ public class SongController {
 			return "redirect:/";
 		}
 		viewModel.addAttribute("currentSong", songServ.readOneSong(id));
+		viewModel.addAttribute("genres", genres);
 		return "editSong.jsp";
 	}
 	
