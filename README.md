@@ -1,1 +1,3 @@
-"# MuseMusicApp" 
+Muse- Music Discovery App
+
+
